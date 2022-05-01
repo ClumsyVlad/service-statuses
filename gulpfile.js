@@ -18,9 +18,8 @@ function clean() {
 }
 
 function images() {
-  return src('src/img/**/*')
-    .pipe(imagemin())
-    .pipe(dest('dist/img'))
+  return src('src/assets/**/*')
+    .pipe(dest('dist/assets'))
 }
 
 function styles() {
@@ -46,6 +45,7 @@ function build() {
   return src([
     'src/css/style.min.css',
     'src/fonts/**/*',
+    'src/assets/**/*',
     'src/**/*.html ',
     'src/**/*.js ',
   ], { base: 'src' })
@@ -67,4 +67,4 @@ exports.scripts = scripts;
 exports.clean = clean;
 
 exports.build = series(clean, images, build);
-exports.default = parallel(browsersync, watching)
+exports.default = parallel(build, browsersync, watching)
