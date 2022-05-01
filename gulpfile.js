@@ -35,17 +35,27 @@ function styles() {
     .pipe(browserSync.stream())
 }
 
+function scripts() {
+  return src('src/js/*.js')
+    .pipe(dest('dist/js'))
+    .pipe(dest('docs/js'))
+    .pipe(browserSync.stream())
+}
+
 function build() {
   return src([
     'src/css/style.min.css',
     'src/fonts/**/*',
     'src/**/*.html ',
+    'src/**/*.js ',
   ], { base: 'src' })
     .pipe(dest('dist'))
+    .pipe(dest('docs'))
 }
 
 function watching() {
   watch(['src/sass/**/*.sass'], styles)
+  watch(['src/js/**/*.js'], scripts)
   watch(['src/**/*.html']).on('change', browserSync.reload)
 }
 
@@ -53,6 +63,7 @@ exports.styles = styles;
 exports.watching = watching;
 exports.browsersync = browsersync;
 exports.images = images;
+exports.scripts = scripts;
 exports.clean = clean;
 
 exports.build = series(clean, images, build);
