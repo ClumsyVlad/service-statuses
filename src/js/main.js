@@ -41,12 +41,12 @@ const SERVICES = [
 		statusURL: ['https://status.us0.signalfx.com/api/v2/status.json'],
 		type: 'default',
 	},
-	// {
-	// 	name: 'Okta',
-	// 	statusWebsite: 'https://status.okta.com/',
-	// 	statusURL: ['https://trust.okta.com/api/status'],
-	// 	type: 'default',
-	// },
+	{
+		name: 'Okta',
+		statusWebsite: 'https://status.okta.com/',
+		statusURL: ['https://trust.okta.com/api/status'],
+		type: 'default',
+	},
 	{
 		name: 'Zendesk Services',
 		statusWebsite: 'https://status.zendesk.com/',
