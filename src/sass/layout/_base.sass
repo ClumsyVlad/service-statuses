@@ -1,0 +1,108 @@
+*
+  box-sizing: border-box
+  -webkit-font-smoothing: antialiased
+  -ms-overflow-style: none
+  scrollbar-width: none
+
+  &::-webkit-scrollbar
+    display: none
+
+html
+  height: 100%
+  max-height: 100%
+  font-family: 'Poppins', sans-serif
+  overflow: hidden
+
+body
+  height: 100%
+  max-height: 100%
+  background-image: url('/assets/backgroundmage.jpg')
+  background-size: cover
+  background-repeat: no-repeat
+  color: $white
+  overflow: scroll
+
+.main
+  display: flex
+  flex-direction: column
+  width: 100%
+
+.section
+  display: flex
+  flex-direction: column
+  width: 100%
+
+.section--hero
+  row-gap: 48px
+  padding: 48px 24px
+
+.container
+  display: flex
+  flex-direction: column
+  align-items: center
+  width: 100%
+  max-width: 1320px
+  padding-left: 20px
+  padding-right: 20px
+  margin: 0 auto
+
+  +media(l)
+    max-width: 100%
+
+.title
+  font-size: 48px
+  line-height: 64px
+  font-weight: bold
+
+.services
+  display: flex
+  flex-direction: column
+  gap: 32px
+  width: 100%
+  max-width: 100%
+
+.service
+  display: flex
+  align-items: center
+  flex-wrap: wrap
+  gap: 24px
+  padding: 24px 48px
+  border: 1px solid $white
+  border-radius: 8px
+  background-color: #{$dark}80
+
+.service--last
+  order: 1
+
+.service__title
+  width: 100%
+  max-width: calc(50% - 12px)
+  font-size: 24px
+  line-height: 32px
+
+.service__status
+  width: 100%
+  max-width: calc(50% - 12px)
+  font-size: 24px
+  line-height: 32px
+  text-transform: capitalize
+  transition: $all
+
+  &:hover,
+  &:focus-visible
+    color: $blue
+
+.service__status--loading
+  color: $gray
+
+.service__status--error
+  color: $red
+
+.service__status--okay
+  color: $green
+
+.service__table
+  width: 100%
+  background-color: $white
+  padding: 24px
+  border-radius: 8px

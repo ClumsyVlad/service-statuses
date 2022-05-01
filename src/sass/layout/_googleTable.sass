@@ -1,0 +1,106 @@
+.main-dashboard-table
+  border-collapse: collapse
+  width: 100%
+  color: $dark
+
+  & td
+    border: 1px solid #eee
+    font-size: 13px
+    padding: 15px 0
+    position: relative
+    width: 10%
+
+  & td:first-child
+    border-left: none
+
+  & td:last-child
+    border-right: none
+
+  & td.product-name
+    padding-right: 5px
+    white-space: nowrap
+
+.product-day
+  background-color: #fcfcfc
+
+.date-offset
+  position: relative
+  right: 100%
+
+.date-header
+  color: #767676
+  font-size: 13px
+  font-weight: normal
+  position: relative
+  right: -4px
+  text-align: right
+
+.status-container
+  position: absolute
+  top: 36%
+  z-index: 9999
+
+  &.end-marker
+    left: 100%
+
+  & .status-icon
+    left: -8px
+
+.status-icon
+  border-radius: 15px
+  display: inline-block
+  height: 15px
+  position: relative
+  width: 15px
+
+  &::after,
+  &::before
+    line-height: 150%
+
+  &.available
+    background-color: #0da960
+
+  &.available::after
+    bottom: 1.5px
+    color: #fff
+    content: "✓"
+    display: inline-block
+    position: relative
+    text-align: center
+    width: 15px
+
+  &.disruption
+    background-color: #ff8000
+
+  &.disruption::after
+    bottom: 1.5px
+    color: #fff
+    content: "!"
+    display: inline-block
+    position: relative
+    text-align: center
+    width: 15px
+
+  &.outage
+    background-color: #dd4b39
+
+  &.outage::after
+    bottom: 1.5px
+    color: #fff
+    content: "×"
+    display: inline-block
+    position: relative
+    text-align: center
+    width: 15px
+
+  &.information
+    background-color: #808080
+
+  &.information::after
+    bottom: 2.5px
+    color: #fff
+    content: "-"
+    display: inline-block
+    position: relative
+    text-align: center
+    width: 15px
