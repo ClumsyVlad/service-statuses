@@ -41,6 +41,12 @@ const SERVICES = [
 		statusURL: ['https://status.us0.signalfx.com/api/v2/status.json'],
 		type: 'default',
 	},
+	// {
+	// 	name: 'Okta',
+	// 	statusWebsite: 'https://status.okta.com/',
+	// 	statusURL: ['https://trust.okta.com/api/status'],
+	// 	type: 'default',
+	// },
 	{
 		name: 'Zendesk Services',
 		statusWebsite: 'https://status.zendesk.com/',
@@ -85,23 +91,24 @@ const SERVICES = [
 	},
 ]
 
-const body = document.body;
-const servicesContainer = body.querySelector('.services');
+
+const body = document.body
+const servicesContainer = body.querySelector('.services')
 
 SERVICES.forEach(async (service) => {
-	const serviceItem = document.createElement('div');
-	serviceItem.classList.add('service');
-	servicesContainer.appendChild(serviceItem);
+	const serviceItem = document.createElement('div')
+	serviceItem.classList.add('service')
+	servicesContainer.appendChild(serviceItem)
 	if (service.type === 'default' || service.type === 'details') {
 		serviceItem.innerHTML = `
 			<h3 class="service__title">
 				${service.name}
 			</h3>
 			<a href="${service.statusWebsite}" target="_blank" class="service__status service__status--loading">Status loading...</a>
-		`;
+		`
 		await fetch(service.statusURL)
 			.then((response) => {
-				return response.json();
+				return response.json()
 			})
 			.then((data) => {
 				if (service.type === 'default') {
@@ -111,7 +118,7 @@ SERVICES.forEach(async (service) => {
 						</h3>
 						<a href="${service.statusWebsite}" target="_blank" class="service__status service__status--okay">${data.status.description}</a>
 					`
-				};
+				}
 				if (service.type === 'details') {
 					serviceItem.innerHTML = `
 						<h3 class="service__title">
@@ -119,33 +126,33 @@ SERVICES.forEach(async (service) => {
 						</h3>
 						<a href="${service.statusWebsite}" target="_blank" class="service__status service__status--okay">${data.status.toString()}</a>
 					`
-				};
+				}
 			})
 			.catch(err => {
-				console.log('Fetch error: ', err);
+				console.log('Fetch error: ', err)
 				serviceItem.innerHTML = `
 					<h3 class="service__title">
 						${service.name}
 					</h3>
 					<a href="${service.statusWebsite}" target="_blank" class="service__status service__status--error">Getting status error...</a>
 				`
-			});
+			})
 	} else if (service.type === 'google-table') {
 		const stringToHTML = (string) => {
-			const parser = new DOMParser();
-			const document = parser.parseFromString(string, 'text/html');
-			return document.body;
-		};
+			const parser = new DOMParser()
+			const document = parser.parseFromString(string, 'text/html')
+			return document.body
+		}
 		const makeHttpObject = () => {
-			if ("XMLHttpRequest" in window) return new XMLHttpRequest();
-			else if ("ActiveXObject" in window) return new ActiveXObject("Msxml2.XMLHTTP");
-		};
-		const request = makeHttpObject();
-		request.open("GET", service.statusURL, true);
-		request.send(null);
+			if ("XMLHttpRequest" in window) return new XMLHttpRequest()
+			else if ("ActiveXObject" in window) return new ActiveXObject("Msxml2.XMLHTTP")
+		}
+		const request = makeHttpObject()
+		request.open("GET", service.statusURL, true)
+		request.send(null)
 		request.onreadystatechange = () => {
 			if (request.readyState == 4) {
-				const statusElementResponse = request.responseText;
+				const statusElementResponse = request.responseText
 				serviceItem.innerHTML = `
 					<h3 class="service__title">
 						${service.name}
@@ -154,8 +161,8 @@ SERVICES.forEach(async (service) => {
 					<div class="service__table">
 						${stringToHTML(statusElementResponse).querySelector('table').outerHTML}
 					</div>
-				`;
-			};
-		};
-	};
-});
+				`
+			}
+		}
+	}
+})
