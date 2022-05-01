@@ -42,12 +42,6 @@ const SERVICES = [
 		type: 'default',
 	},
 	{
-		name: 'Okta',
-		statusWebsite: 'https://status.okta.com/',
-		statusURL: ['https://trust.okta.com/api/status'],
-		type: 'default',
-	},
-	{
 		name: 'Zendesk Services',
 		statusWebsite: 'https://status.zendesk.com/',
 		statusURL: ['https://status.zendesk.com/api/components/services?domain=support.zendesk.com'],
@@ -106,7 +100,7 @@ SERVICES.forEach(async (service) => {
 			</h3>
 			<a href="${service.statusWebsite}" target="_blank" class="service__status service__status--loading">Status loading...</a>
 		`
-		await fetch(service.statusURL)
+		await fetch(`https://api.allorigins.win/raw?url=${service.statusURL}`)
 			.then((response) => {
 				return response.json()
 			})
@@ -148,7 +142,7 @@ SERVICES.forEach(async (service) => {
 			else if ("ActiveXObject" in window) return new ActiveXObject("Msxml2.XMLHTTP")
 		}
 		const request = makeHttpObject()
-		request.open("GET", service.statusURL, true)
+		request.open("GET", `https://api.allorigins.win/raw?url=${service.statusURL}`, true)
 		request.send(null)
 		request.onreadystatechange = () => {
 			if (request.readyState == 4) {

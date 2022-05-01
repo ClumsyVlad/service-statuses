@@ -3,7 +3,6 @@ const sass = require('gulp-sass')(require('sass'));
 const concat = require('gulp-concat');
 const browserSync = require('browser-sync').create();
 const autoprefixer = require('gulp-autoprefixer');
-const imagemin = require('gulp-imagemin');
 const del = require('del')
 
 function browsersync() {
@@ -15,11 +14,6 @@ function browsersync() {
 
 function clean() {
   return del('dist')
-}
-
-function images() {
-  return src('src/assets/**/*')
-    .pipe(dest('dist/assets'))
 }
 
 function styles() {
@@ -45,7 +39,6 @@ function build() {
   return src([
     'src/css/style.min.css',
     'src/fonts/**/*',
-    'src/assets/**/*',
     'src/**/*.html ',
     'src/**/*.js ',
   ], { base: 'src' })
@@ -62,9 +55,8 @@ function watching() {
 exports.styles = styles;
 exports.watching = watching;
 exports.browsersync = browsersync;
-exports.images = images;
 exports.scripts = scripts;
 exports.clean = clean;
 
-exports.build = series(clean, images, build);
+exports.build = series(clean, build);
 exports.default = parallel(build, browsersync, watching)
