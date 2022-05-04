@@ -94,6 +94,7 @@ const SERVICES = [
 
 const body = document.body
 const servicesContainer = body.querySelector('.services')
+const proxyUrl = 'https://api.allorigins.win/raw?url='
 
 SERVICES.forEach(async (service) => {
 	const serviceItem = document.createElement('div')
@@ -106,7 +107,7 @@ SERVICES.forEach(async (service) => {
 			</h3>
 			<a href="${service.statusWebsite}" target="_blank" class="service__status service__status--loading">Status loading...</a>
 		`
-		await fetch(`https://api.allorigins.win/raw?url=${service.statusURL}`)
+		await fetch(proxyUrl + service.statusURL)
 			.then((response) => {
 				return response.json()
 			})
@@ -156,7 +157,7 @@ SERVICES.forEach(async (service) => {
 			else if ("ActiveXObject" in window) return new ActiveXObject("Msxml2.XMLHTTP")
 		}
 		const request = makeHttpObject()
-		request.open("GET", `https://api.allorigins.win/raw?url=${service.statusURL}`, true)
+		request.open("GET", proxyUrl + service.statusURL, true)
 		request.send(null)
 		request.onreadystatechange = () => {
 			if (request.readyState == 4) {
